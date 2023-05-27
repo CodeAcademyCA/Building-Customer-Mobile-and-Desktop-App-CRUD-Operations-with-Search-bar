@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maui.CustomerApp.CustomerViews.CustomerMainPage"
+             Title="Customers">
+
+    <Grid RowDefinitions="50,100*"
+          ColumnDefinitions=".70*, .30*"
+          RowSpacing="10">
+
+        <SearchBar Grid.Row="0"
+                   Grid.Column="0"
+                   Placeholder="Search Customer"
+                   Margin="5"
+                   x:Name="searchBar"
+                   TextChanged="searchBar_TextChanged"/>
+
+        <Button Text="+"
+                Grid.Row="0"
+                Grid.Column="1"
+                FontSize="20"
+                BorderWidth="0"
+                TextColor="blue"
+                BackgroundColor="Transparent"
+                x:Name="BtnAddCustomer"
+                Clicked="BtnAddCustomer_Clicked"/>
+
+        <ListView BackgroundColor="Transparent"
+              x:Name="UIContactList"
+              RowHeight="50"
+              Margin="10"
+                  Grid.Row="1"
+                  Grid.ColumnSpan="2"
+              ItemSelected="UIContactList_ItemSelected"
+              ItemTapped="UIContactList_ItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Path=Name}"
+                          Detail="{Binding Email}"
+                          DetailColor="IndianRed">
+                        <TextCell.ContextActions>
+                            <MenuItem Text="Delete" 
+                                      IsDestructive="True"
+                                      x:Name="MenuItemDelete"
+                                      Clicked="MenuItemDelete_Clicked"
+                                      CommandParameter="{Binding .}"/>
+                        </TextCell.ContextActions>
+                    </TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+    </Grid>
+    
+</ContentPage>
